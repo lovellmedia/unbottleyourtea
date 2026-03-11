@@ -1,0 +1,35 @@
+---
+const { currentPage } = Astro.props;
+
+const navItems = [
+  { key: 'index', label: 'Overview', href: '/tea-etiquette-trends-technical-vocabulary/' },
+  { key: 'history', label: 'History & Evolution', href: '/tea-etiquette-trends-technical-vocabulary/history/' },
+  { key: 'technical-deep-dive', label: 'Technical Deep-Dive', href: '/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/' },
+  { key: 'ontology', label: 'Ontology', href: '/tea-etiquette-trends-technical-vocabulary/ontology/' },
+  { key: 'trends', label: 'Current Trends', href: '/tea-etiquette-trends-technical-vocabulary/trends/' },
+  { key: 'tools', label: 'Tools & Resources', href: '/tea-etiquette-trends-technical-vocabulary/tools/' },
+  { key: 'challenges', label: 'Challenges', href: '/tea-etiquette-trends-technical-vocabulary/challenges/' },
+];
+---
+
+<aside class="w-full md:w-64 flex-shrink-0">
+  <nav class="sticky top-10 flex flex-col gap-1 text-sm font-medium uppercase tracking-widest">
+    <div class="text-slate-400 text-[10px] pb-2 border-b border-primary/10 mb-4">Tea Culture Guide</div>
+    {navItems.map(item => {
+      const isActive = currentPage === item.key;
+      return (
+        <a 
+          class={`group flex items-center justify-between py-3 border-b border-primary/5 ${isActive ? 'text-primary' : 'text-slate-600 hover:text-primary'} transition-colors`}
+          href={item.href}
+        >
+          <span>{item.label}</span>
+          <span class={`material-symbols-outlined text-sm ${isActive ? '' : 'opacity-0 group-hover:opacity-100'}`}>arrow_forward</span>
+        </a>
+      );
+    })}
+    <div class="mt-12 bg-secondary/10 p-6 rounded-lg border border-secondary/20">
+      <p class="text-xs text-secondary font-bold mb-2">Did You Know?</p>
+      <p class="text-[11px] text-slate-600 normal-case leading-relaxed font-normal">Tea is the second most consumed beverage in the world after water, with over 3 billion cups enjoyed daily.</p>
+    </div>
+  </nav>
+</aside>

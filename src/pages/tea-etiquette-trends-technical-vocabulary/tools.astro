@@ -1,0 +1,140 @@
+---
+import TopicLayout from '../../layouts/TopicLayout.astro';
+
+const title = "Essential Tea Tools and Resources - Equipment Guide";
+const description = "Comprehensive guide to tea brewing equipment including teapots, kettles, infusers, matcha tools, and interactive brewing calculators.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<TopicLayout title={title} description={description} currentPage="tools" canonicalURL={canonicalURL}>
+  <article class="prose prose-lg max-w-none">
+    <h1 class="text-4xl font-bold text-slate-900 mb-6">Essential Tea Tools and Resources</h1>
+    
+    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+      Quality teaware transforms tea brewing into a precise ritual that dramatically improves flavor extraction and the overall tea experience. The most impactful investments are a good teapot, a temperature-controlled kettle, and appropriate infusers, as these tools directly control steeping conditions and water temperature—the two primary factors determining flavor quality.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Teapots: The Foundation of Brewing</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Kyusu teapots are the traditional and functionally superior choice for Japanese tea brewing. The kyusu features a side-handled design that provides precise one-handed pouring control and includes a built-in ceramic mesh strainer that catches fine leaf particles while allowing water to flow freely around the leaves, producing a cleaner, more refined brew than external infuser baskets.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      A quality teapot is the single most important tea-making tool because it controls the steeping environment that determines flavor extraction. If you primarily drink Japanese green teas, a kyusu with a built-in ceramic strainer is the single best investment because it handles all Japanese tea types optimally and eliminates the need for separate strainers.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      For Chinese teas and gongfu brewing, Yixing clay teapots offer unique benefits through their porous nature that seasons with use. However, dedicated pots should be reserved for single tea types to prevent flavor cross-contamination. Learn more about brewing techniques in our <a href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/" class="text-primary hover:underline">Technical Deep-Dive</a>.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Temperature-Controlled Kettles</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Temperature-controlled (variable-temperature) kettles are essential for proper tea extraction. Electric kettles are convenient and often come with temperature settings, making them popular for tea lovers. A variable-temperature kettle eliminates guesswork about cooling boiled water and is the best second purchase after a good teapot, as water temperature dramatically impacts the flavor of tea.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Key features to look for include precise temperature control (ideally 1-degree increments), hold temperature function, and quick boil times. Gooseneck spouts provide superior pouring control, particularly important for gongfu brewing and pour-over methods.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Infusers and Strainers</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      For brewing tea in cups or mugs rather than dedicated teapots, basket-style infusers that sit inside the cup are recommended because they give leaves room to circulate fully during steeping. Mesh infusers are versatile and allow water to flow freely around leaves, ensuring good extraction across all tea types.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Fine mesh strainers are essential for catching small particles and work well for all tea types, especially herbal teas with tiny leaf bits. Avoid infusers that are too small or have large pores that allow debris to pass through.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Matcha-Specific Tools</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      The chasen (bamboo whisk) is the single most essential tool for matcha preparation. Hand-carved from a single piece of bamboo with 80-120 fine tines, the chasen creates the characteristic microfoam that defines properly prepared matcha—a function that electric frothers and metal whisks cannot replicate.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      A chawan (wide, bowl-shaped tea cup) is essential for matcha because the wide opening provides room for the whisking motion required to create proper foam. Japanese yunomi (cylindrical tea cups without handles) are designed for green tea—the thin ceramic walls allow you to feel the temperature of the tea through the cup.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Storage Solutions</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Airtight canisters prevent moisture and preserve freshness, making them ideal for protecting tea leaves. Opaque canisters protect tea from light exposure, which maintains flavor—particularly important for organic tea and high-quality leaves. For long-term storage of pu-erh and other aged teas, specialized clay containers or breathable paper wrapping allows proper air circulation while protecting from odors.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Interactive Tea Brewing Calculator</h2>
+    
+    <div class="bg-secondary/10 p-8 rounded-lg border border-secondary/20 mb-8">
+      <h3 class="text-xl font-bold text-slate-900 mb-4">Calculate Your Perfect Brew</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Tea Type</label>
+          <select id="teaType" class="w-full p-2 border border-slate-300 rounded" onchange="updateRecommendation()">
+            <option value="green">Green Tea</option>
+            <option value="white">White Tea</option>
+            <option value="oolong">Oolong Tea</option>
+            <option value="black">Black Tea</option>
+            <option value="puerh">Pu-erh Tea</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-2">Amount of Water</label>
+          <select id="waterAmount" class="w-full p-2 border border-slate-300 rounded" onchange="updateRecommendation()">
+            <option value="8">8 oz (1 cup)</option>
+            <option value="12">12 oz</option>
+            <option value="16">16 oz (2 cups)</option>
+            <option value="32">32 oz (4 cups)</option>
+          </select>
+        </div>
+      </div>
+      <div id="brewResults" class="mt-6 p-4 bg-white rounded border border-slate-200">
+        <h4 class="font-bold text-slate-800 mb-2">Recommended Brewing Parameters:</h4>
+        <ul class="text-slate-600 space-y-1">
+          <li><strong>Temperature:</strong> <span id="recTemp">175°F (80°C)</span></li>
+          <li><strong>Steep Time:</strong> <span id="recTime">2-3 minutes</span></li>
+          <li><strong>Tea Amount:</strong> <span id="recAmount">2-3 grams (1 teaspoon)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <script is:inline>
+      function updateRecommendation() {
+        const teaType = document.getElementById('teaType').value;
+        const waterAmount = document.getElementById('waterAmount').value;
+        
+        const recommendations = {
+          green: { temp: '175°F (80°C)', time: '1-3 minutes', ratio: 2.5 },
+          white: { temp: '175-185°F (80-85°C)', time: '2-5 minutes', ratio: 3 },
+          oolong: { temp: '185-195°F (85-90°C)', time: '2.5-5 minutes', ratio: 3 },
+          black: { temp: '200-212°F (93-100°C)', time: '3-5 minutes', ratio: 2.5 },
+          puerh: { temp: '200-212°F (93-100°C)', time: '3-5 minutes', ratio: 4 }
+        };
+        
+        const rec = recommendations[teaType];
+        const teaGrams = Math.round(rec.ratio * waterAmount / 8 * 10) / 10;
+        
+        document.getElementById('recTemp').textContent = rec.temp;
+        document.getElementById('recTime').textContent = rec.time;
+        document.getElementById('recAmount').textContent = teaGrams + ' grams (' + Math.round(teaGrams / 2.5) + ' teaspoon' + (teaGrams > 2.5 ? 's' : '') + ')';
+      }
+      // Initialize on load
+      if (typeof window !== 'undefined') {
+        window.addEventListener('load', updateRecommendation);
+      }
+    </script>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Tea Vocabulary Glossary</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Understanding <a href="/tea-etiquette-trends-technical-vocabulary/ontology/" class="text-primary hover:underline">specialized tea terminology</a> helps when selecting equipment and communicating with vendors. Key terms include:
+    </p>
+    <ul class="list-disc pl-6 text-slate-600 leading-relaxed mb-4">
+      <li><strong>Gaiwan</strong>: Lidded bowl used for gongfu brewing</li>
+      <li><strong>Fair cup (gong dao bei)</strong>: Pitcher for distributing brewed tea evenly</li>
+      <li><strong>Cha hai</strong>: Literally "sea of tea," another term for fair cup</li>
+      <li><strong>Tea pet</strong>: Small clay figurine "fed" with tea during gongfu sessions</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Priority Recommendations for Beginners</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      You do not need to spend a fortune to brew excellent tea. For beginners, the most practical starting points are: (1) a quality teapot or basket infuser for single-cup brewing, (2) a variable-temperature kettle, and (3) for matcha drinkers, a quality chasen whisk. These three tools have the greatest direct impact on flavor. Decorative elements like handmade yunomi cups enhance the aesthetic and ritual experience but do not significantly change the taste of the tea.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      As you develop your palate and preferences, you may encounter <a href="/tea-etiquette-trends-technical-vocabulary/challenges/" class="text-primary hover:underline">common brewing challenges</a>. The right tools—combined with proper technique—help overcome these obstacles and unlock the full potential of your tea.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      The tea industry's evolution toward <a href="/tea-etiquette-trends-technical-vocabulary/trends/" class="text-primary hover:underline">specialty and premium products</a> has elevated the quality and variety of available equipment. From traditional handcrafted Yixing pots to precision digital kettles, today's tea enthusiast has access to tools that previous generations could only imagine.
+    </p>
+  </article>
+</TopicLayout>

@@ -1,0 +1,91 @@
+---
+import TopicLayout from '../../layouts/TopicLayout.astro';
+
+const title = "Tea Ontology and Knowledge Base - Classification, Terminology, and Taxonomy";
+const description = "Comprehensive guide to tea classification systems, Camellia sinensis varieties, processing methods, grading systems, and specialized tea tasting vocabulary.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<TopicLayout title={title} description={description} currentPage="ontology" canonicalURL={canonicalURL}>
+  <article class="prose prose-lg max-w-none">
+    <h1 class="text-4xl font-bold text-slate-900 mb-6">Tea Ontology and Knowledge Base</h1>
+    
+    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+      All true teas derive from the Camellia sinensis plant, with types distinguished primarily by processing methods that control oxidation levels, ranging from unoxidized white and green teas to fully oxidized black teas. This botanical unity combined with processing diversity creates a classification system that has evolved over centuries, incorporating traditional knowledge, regional practices, and modern scientific understanding.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">The Camellia Sinensis Species and Its Varieties</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      The tea plant belongs to the genus Camellia in the family Theaceae. The specific species Camellia sinensis encompasses all tea-producing plants, with two primary varieties dominating commercial cultivation. As documented by botanical researchers at <a href="https://en.wikipedia.org/wiki/Camellia_sinensis" class="text-primary hover:underline" target="_blank" rel="noopener">Wikipedia</a>, these varieties are C. sinensis var. sinensis and C. sinensis var. assamica.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      C. sinensis var. sinensis (China bush) features small, delicate leaves and demonstrates cold resistance, thriving at higher elevations and in temperate climates. This variety dominates Chinese tea production and is used primarily for green, white, and oolong teas. Its leaves contain higher concentrations of catechins and amino acids, contributing to the sweet, complex flavors prized in Chinese tea traditions.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      C. sinensis var. assamica (Assam bush) produces large, robust leaves and thrives in warm, tropical low-elevation regions. Native to the Assam region of India, this variety is ideal for black teas, producing the strong, malty character characteristic of Assam and Ceylon teas.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      For those interested in the complete history of how these varieties spread globally, visit our <a href="/tea-etiquette-trends-technical-vocabulary/history/" class="text-primary hover:underline">History and Evolution</a> pillar.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">The Six Categories of Tea: Processing Determines Type</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      The six major tea categories all derive from the same plant species, differentiated solely by processing methodology. As tea classification experts explain, processing transforms fresh leaves through steps like withering, rolling, oxidizing, and firing. Oxidation level serves as the primary taxonomic criterion.
+    </p>
+    
+    <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">White Tea</h3>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      White tea undergoes minimal processing: sun-withering followed by gentle drying without rolling or intentional oxidation. This preserves the highest levels of original catechins and creates the delicate, sweet flavor profile white tea is known for. Grades range from Bai Hao Yin Zhen (Silver Needle, highest grade using only unopened buds) through Bai Mu Dan (White Peony) to Shou Mei (Longevity Eyebrow).
+    </p>
+
+    <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">Green Tea</h3>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Green tea processing applies heat immediately after picking to kill enzymes that would otherwise cause oxidation. This fixing step can involve steaming (Japanese method) or pan-firing (Chinese method). Famous examples include Long Jing (Dragon Well) and Japanese Sencha. Learn more about optimal brewing in our <a href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/" class="text-primary hover:underline">Technical Deep-Dive</a>.
+    </p>
+
+    <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">Oolong Tea (Wu Long)</h3>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Oolong undergoes partial oxidation (10-70%), creating the most diverse category. Regional sub-styles include Min Bei (Northern Fujian), Min Nan (Southern Fujian like Tie Guan Yin), and Taiwan high mountain oolongs.
+    </p>
+
+    <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">Black Tea (Red Tea)</h3>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Black tea undergoes full oxidation after withering and rolling, producing the strongest flavor and highest caffeine content. Notable varieties include Chinese Keemun, Indian Assam and Darjeeling, and Sri Lankan Ceylon.
+    </p>
+
+    <h3 class="text-xl font-bold text-slate-800 mt-8 mb-3">Dark Tea (Pu-erh)</h3>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Dark tea involves microbial post-fermentation after initial firing, often followed by aging. Pu-erh from Yunnan represents the most famous type, divided into sheng (raw) and shou (ripe) styles.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Tea Grading Systems and Quality Indicators</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Grading reflects leaf quality, size, and picking standard. Black tea grading often uses the Orange Pekoe system: OP (Orange Pekoe), FOP (Flowery OP), GFOP (Golden FOP), and higher grades. Generally, whole-leaf grades yield more nuanced brews than broken grades or fannings.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Understanding grades helps when navigating <a href="/tea-etiquette-trends-technical-vocabulary/challenges/" class="text-primary hover:underline">specialty tea purchasing</a> and avoiding common quality issues.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Specialized Vocabulary for Tea Tasting and Evaluation</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Tea evaluation uses specialized sensory terms for aroma, flavor, mouthfeel, and liquor. Aroma descriptors include floral (jasmine), fruity (berry), vegetal (grass), toasty (roast), and earthy (pu-erh). Flavor characteristics range from brisk (astringent bite in blacks) to mellow (smooth greens) and umami (savory in high-grade greens).
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Body and mouthfeel descriptions include light (greens), full (blacks), creamy (oolongs), and astringent. The liquor's appearance is described by brightness (lively color/clarity), coppery (black tea), and pale gold (white tea). Additional terms include cha qi (energy/body feel) and huigan (sweet aftertaste).
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      For a comprehensive look at the specialized tools used in professional evaluation, see our <a href="/tea-etiquette-trends-technical-vocabulary/tools/" class="text-primary hover:underline">Tools and Resources</a> section.
+    </p>
+
+    <h2 class="text-2xl font-bold text-slate-900 mt-12 mb-4">Current Market Classifications and Trends</h2>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      The modern tea market has developed additional classification systems beyond traditional categories. Organic certification, fair-trade designation, single-origin versus blended, and harvest season (first flush, second flush, autumnal) all inform consumer understanding. Specialty tea markets emphasize transparency in sourcing, with many vendors providing detailed information about garden, elevation, cultivar, and processing date.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Emerging categories include purple tea (high anthocyanin varieties from Kenya), yellow tea revival (rare Chinese category), and aged white tea (following pu-erh's aging model). The <a href="/tea-etiquette-trends-technical-vocabulary/trends/" class="text-primary hover:underline">Current Trends</a> pillar explores how these classifications evolve with market demands.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-4">
+      Mastering tea's taxonomy enables more informed purchasing, brewing, and appreciation. From understanding why a Tie Guan Yin differs from a Da Hong Pao to recognizing quality indicators in grading terminology, this knowledge foundation supports every aspect of tea culture engagement.
+    </p>
+  </article>
+</TopicLayout>

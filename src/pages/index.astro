@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Unbottle Your Tea - Tea Etiquette, Trends, and Technical Vocabulary";
+const description = "Discover the art of tea etiquette, current trends, and technical vocabulary for tea enthusiasts. Explore Chinese gongfu, Japanese chanoyu, British afternoon tea, and modern specialty brewing.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <main class="px-6 md:px-20 lg:px-40 py-10 flex flex-col md:flex-row gap-12">
+    <!-- Left Navigation -->
+    <aside class="w-full md:w-64 flex-shrink-0">
+      <nav class="sticky top-10 flex flex-col gap-1 text-sm font-medium uppercase tracking-widest">
+        <div class="text-slate-400 text-[10px] pb-2 border-b border-primary/10 mb-4">Tea Culture Guide</div>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/">
+          <span>Overview</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/history/">
+          <span>History & Evolution</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/">
+          <span>Technical Deep-Dive</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/ontology/">
+          <span>Ontology</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/trends/">
+          <span>Current Trends</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/tools/">
+          <span>Tools & Resources</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/challenges/">
+          <span>Challenges</span>
+          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
+        </a>
+        <div class="mt-12 bg-secondary/10 p-6 rounded-lg border border-secondary/20">
+          <p class="text-xs text-secondary font-bold mb-2">Did You Know?</p>
+          <p class="text-[11px] text-slate-600 normal-case leading-relaxed font-normal">Tea is the second most consumed beverage in the world after water, with over 3 billion cups enjoyed daily across countless cultures and traditions.</p>
+        </div>
+      </nav>
+    </aside>
+    
+    <!-- Center Content -->
+    <div class="flex-1 max-w-3xl">
+      <!-- Breadcrumbs -->
+      <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-8">
+        <span class="text-primary">Home</span>
+      </div>
+      
+      <!-- Welcome Section -->
+      <section class="mb-16">
+        <h1 class="text-4xl font-bold text-slate-900 mb-6">Welcome to Unbottle Your Tea</h1>
+        <p class="text-xl text-slate-600 leading-relaxed mb-6">
+          Discover the rich world of tea culture through our comprehensive guide covering etiquette across traditions, current industry trends, and essential technical knowledge. Whether you're a curious beginner or a seasoned enthusiast, explore the art and science of tea appreciation.
+        </p>
+        <div class="flex gap-3">
+          <a href="/tea-etiquette-trends-technical-vocabulary/" class="flex items-center gap-2 rounded-sm border border-primary px-6 py-3 bg-primary text-white text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
+            <span>Start Exploring</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Topic Cards -->
+      <section class="mb-20" id="topics">
+        <div class="flex items-baseline justify-between border-b-2 border-primary pb-2 mb-8">
+          <h2 class="text-2xl font-bold uppercase tracking-tighter text-slate-900">Explore the Guide</h2>
+          <span class="text-sm font-serif italic text-slate-500">Seven Essential Topics</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="/tea-etiquette-trends-technical-vocabulary/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">menu_book</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Overview</h3>
+            <p class="text-xs text-slate-500 leading-normal">Comprehensive introduction to tea etiquette, trends, and technical vocabulary across global traditions.</p>
+          </a>
+          <a href="/tea-etiquette-trends-technical-vocabulary/history/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">history</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">History & Evolution</h3>
+            <p class="text-xs text-slate-500 leading-normal">Journey through 5,000 years of tea culture from ancient China to modern global phenomena.</p>
+          </a>
+          <a href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">science</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Technical Deep-Dive</h3>
+            <p class="text-xs text-slate-500 leading-normal">Master brewing parameters including temperature, timing, ratios, and water quality.</p>
+          </a>
+          <a href="/tea-etiquette-trends-technical-vocabulary/ontology/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">account_tree</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Ontology</h3>
+            <p class="text-xs text-slate-500 leading-normal">Classification systems, Camellia sinensis varieties, processing methods, and grading terminology.</p>
+          </a>
+          <a href="/tea-etiquette-trends-technical-vocabulary/trends/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">trending_up</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Current Trends</h3>
+            <p class="text-xs text-slate-500 leading-normal">Industry insights on specialty markets, sustainability, bubble tea, and emerging innovations.</p>
+          </a>
+          <a href="/tea-etiquette-trends-technical-vocabulary/tools/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl">hardware</span>
+            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Tools & Resources</h3>
+            <p class="text-xs text-slate-500 leading-normal">Essential equipment guide with interactive brewing calculator for perfect cups every time.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Featured Section -->
+      <section id="featured">
+        <div class="flex items-baseline justify-between border-b-2 border-secondary pb-2 mb-8">
+          <h2 class="text-2xl font-bold uppercase tracking-tighter text-slate-900">Featured</h2>
+          <span class="text-sm font-serif italic text-slate-500">Common Challenges</span>
+        </div>
+        <div class="bg-primary/5 p-8 rounded-sm relative overflow-hidden border-l-4 border-primary">
+          <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/10 pointer-events-none">format_quote</span>
+          <p class="text-slate-800 font-serif italic text-xl leading-relaxed mb-6">"Every tea master began as a confused beginner. The challenges we face are universal experiences, not personal failures. Each mistake teaches valuable lessons that ultimately deepen appreciation."</p>
+          <div class="flex items-center gap-3">
+            <div class="size-10 rounded-full bg-slate-300 overflow-hidden flex items-center justify-center">
+              <span class="material-symbols-outlined text-slate-500">emoji_food_beverage</span>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-widest text-slate-900">Navigate Challenges</p>
+              <p class="text-[10px] text-slate-500">Solutions to common tea appreciation obstacles</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6">
+          <a href="/tea-etiquette-trends-technical-vocabulary/challenges/" class="text-primary hover:underline text-sm font-medium">Read about common challenges and solutions →</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
