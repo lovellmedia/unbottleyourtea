@@ -1,136 +1,467 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
-const title = "Unbottle Your Tea - Tea Etiquette, Trends, and Technical Vocabulary";
-const description = "Discover the art of tea etiquette, current trends, and technical vocabulary for tea enthusiasts. Explore Chinese gongfu, Japanese chanoyu, British afternoon tea, and modern specialty brewing.";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const topicSlug = 'tea-etiquette-trends-technical-vocabulary';
+
+const topics = [
+    {
+        id: 'overview',
+        title: 'Overview',
+        description: 'An introduction to global tea ceremonies and etiquette traditions, from Chinese Gongfu to British Afternoon Tea. Discover the foundational principles that guide tea appreciation across cultures and learn how ceremony transforms the simple act of drinking tea into a meaningful experience.',
+        href: `/${topicSlug}/`,
+    },
+    {
+        id: 'history',
+        title: 'History',
+        description: 'Journey through 5,000 years of tea culture, from ancient Chinese legends to the Boston Tea Party and modern innovations. Explore how tea shaped empires, influenced trade routes, and became the world\'s second most-consumed beverage after water.',
+        href: `/${topicSlug}/history/`,
+    },
+    {
+        id: 'technical',
+        title: 'Technical Deep Dive',
+        description: 'Master the science of brewing with precise temperature, timing, and tea-to-water ratios for every tea type. Learn the chemistry behind extraction, the physics of water quality, and the mathematical principles that underpin consistent, delicious results.',
+        href: `/${topicSlug}/technical-deep-dive/`,
+    },
+    {
+        id: 'ontology',
+        title: 'Ontology',
+        description: 'Understand tea plant varieties, oxidation levels, processing methods, and professional tasting vocabulary. Build your knowledge of Camellia sinensis cultivars, terroir influences, and the terminology used by tea masters worldwide.',
+        href: `/${topicSlug}/ontology/`,
+    },
+    {
+        id: 'trends',
+        title: 'Trends',
+        description: 'Explore current movements in specialty tea, sustainability, cold brew innovations, and market forecasts. Stay informed about the evolving landscape of tea consumption, from matcha lattes to blockchain-tracked supply chains.',
+        href: `/${topicSlug}/trends/`,
+    },
+    {
+        id: 'tools',
+        title: 'Tools',
+        description: 'Essential teaware guide covering kyusu, chasen, variable kettles, and brewing equipment for every style. From traditional Chinese gaiwans to modern precision brewers, discover the instruments that elevate your tea practice.',
+        href: `/${topicSlug}/tools/`,
+    },
+    {
+        id: 'challenges',
+        title: 'Challenges',
+        description: 'Common pitfalls in tea preparation and purchasing, with expert solutions for enthusiasts at all levels. Address issues like over-steeping, water quality problems, storage mistakes, and navigating the overwhelming variety of available teas.',
+        href: `/${topicSlug}/challenges/`,
+    },
+];
+
+const teaTypes = [
+    {
+        name: 'Green Tea',
+        description: 'Unoxidized leaves that retain their natural green color and fresh, grassy flavors. Green tea is prized for its high antioxidant content and delicate taste profiles ranging from vegetal to nutty. Popular varieties include Dragon Well (Longjing), Sencha, and Gunpowder. Brewing requires lower temperatures (160-180°F) to avoid bitterness.',
+        origin: 'China, Japan, Korea',
+        caffeine: 'Moderate (20-45mg per cup)',
+    },
+    {
+        name: 'Black Tea',
+        description: 'Fully oxidized leaves producing robust, malty, and often fruity flavors. Black tea forms the foundation of many breakfast blends and milk tea preparations. Notable varieties include Assam, Darjeeling, Ceylon, and Keemun. The oxidation process transforms green leaf compounds into theaflavins and thearubigins, creating complex flavor profiles.',
+        origin: 'India, China, Sri Lanka, Kenya',
+        caffeine: 'High (40-70mg per cup)',
+    },
+    {
+        name: 'Oolong Tea',
+        description: 'Partially oxidized tea occupying the spectrum between green and black. Oolongs offer incredible diversity, from lightly oxidized floral varieties to heavily oxidized, roasted teas. Traditional production involves withering, bruising, partial oxidation, fixing, rolling, and drying. Famous examples include Tieguanyin, Da Hong Pao, and Oriental Beauty.',
+        origin: 'China (Fujian, Guangdong), Taiwan',
+        caffeine: 'Moderate (30-50mg per cup)',
+    },
+    {
+        name: 'White Tea',
+        description: 'Minimal processing preserves the natural state of the tea bud and young leaves. White tea is characterized by subtle sweetness, delicate floral notes, and a silky mouthfeel. Silver Needle (Baihao Yinzhen) and White Peony (Baimudan) represent the pinnacle of this category. The gentle processing preserves high levels of catechins.',
+        origin: 'China (Fujian), India',
+        caffeine: 'Low to Moderate (15-30mg per cup)',
+    },
+    {
+        name: 'Pu-erh Tea',
+        description: 'Fermented tea from Yunnan province that improves with age like fine wine. Pu-erh undergoes microbial fermentation after initial processing, developing earthy, complex flavors over time. Available as raw (sheng) or ripe (shou) varieties, with aged cakes commanding premium prices among collectors.',
+        origin: 'China (Yunnan)',
+        caffeine: 'Moderate to High (30-70mg per cup)',
+    },
+];
+
+const etiquettePrinciples = [
+    {
+        title: 'The Spirit of Hospitality',
+        description: 'Across all tea traditions, the fundamental principle remains consistent: the host serves the guest with genuine care and attention. This spirit transcends specific rules and creates the foundation for meaningful tea experiences. Whether in a formal Japanese tea room or a casual kitchen gathering, the intention behind the service matters more than rigid adherence to protocol.',
+    },
+    {
+        title: 'Attention to Detail',
+        description: 'Tea etiquette emphasizes mindfulness in every aspect of preparation and service. From the temperature of the water to the placement of utensils, each element contributes to the overall experience. This attention to detail reflects respect for the tea, the guests, and the tradition being observed.',
+    },
+    {
+        title: 'Presence and Mindfulness',
+        description: 'Drinking tea offers an opportunity to slow down and be present. Etiquette encourages setting aside distractions and engaging fully with the moment—the aroma of the leaves, the warmth of the cup, the company of fellow drinkers. This mindfulness aspect transforms tea from mere beverage to meditative practice.',
+    },
+    {
+        title: 'Adaptation and Respect',
+        description: 'When participating in tea traditions from other cultures, approach with respect and openness. Learn the basic protocols beforehand, follow the lead of your host, and express gratitude for the experience. Cultural appreciation, rather than appropriation, guides meaningful cross-cultural tea encounters.',
+    },
+];
+
+const brewingBasics = [
+    {
+        element: 'Water Quality',
+        description: 'Water constitutes 99% of brewed tea, making its quality paramount. Fresh, filtered water free from chlorine and excessive minerals produces the best results. Spring water is ideal, while hard water can mute flavors and soft water may extract too aggressively. Avoid distilled water, which produces flat-tasting tea.',
+    },
+    {
+        element: 'Temperature Control',
+        description: 'Different teas require different temperatures to extract optimal flavors without releasing excessive bitterness. Delicate green teas need cooler water (160-180°F), while black and pu-erh teas can handle boiling water (200-212°F). Investing in a variable temperature kettle or using a thermometer ensures consistency.',
+    },
+    {
+        element: 'Timing Precision',
+        description: 'Steeping time directly controls flavor extraction. Too short yields weak, underdeveloped tea; too long produces bitter, astringent results. Follow recommended times for each tea type, but adjust to personal preference. Use a timer rather than guessing—precision separates good tea from exceptional tea.',
+    },
+    {
+        element: 'Leaf-to-Water Ratio',
+        description: 'The amount of leaf used affects strength and re-steeping potential. Standard ratios range from 1:50 to 1:100 (tea to water by weight). More leaf produces stronger initial infusions with fewer re-steeps; less leaf yields lighter tea suitable for multiple infusions. Experiment to find your preference.',
+    },
+];
 ---
 
-<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
-  <main class="px-6 md:px-20 lg:px-40 py-10 flex flex-col md:flex-row gap-12">
-    <!-- Left Navigation -->
-    <aside class="w-full md:w-64 flex-shrink-0">
-      <nav class="sticky top-10 flex flex-col gap-1 text-sm font-medium uppercase tracking-widest">
-        <div class="text-slate-400 text-[10px] pb-2 border-b border-primary/10 mb-4">Tea Culture Guide</div>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/">
-          <span>Overview</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/history/">
-          <span>History & Evolution</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/">
-          <span>Technical Deep-Dive</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/ontology/">
-          <span>Ontology</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/trends/">
-          <span>Current Trends</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/tools/">
-          <span>Tools & Resources</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <a class="group flex items-center justify-between py-3 border-b border-primary/5 text-slate-600 hover:text-primary transition-colors" href="/tea-etiquette-trends-technical-vocabulary/challenges/">
-          <span>Challenges</span>
-          <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100">arrow_forward</span>
-        </a>
-        <div class="mt-12 bg-secondary/10 p-6 rounded-lg border border-secondary/20">
-          <p class="text-xs text-secondary font-bold mb-2">Did You Know?</p>
-          <p class="text-[11px] text-slate-600 normal-case leading-relaxed font-normal">Tea is the second most consumed beverage in the world after water, with over 3 billion cups enjoyed daily across countless cultures and traditions.</p>
-        </div>
-      </nav>
-    </aside>
+<BaseLayout title="Unbottle Your Tea - Tea Etiquette, Trends & Technical Vocabulary" description="Explore the world of tea - from ancient ceremonies to modern trends, technical brewing techniques, and tea appreciation vocabulary. Discover comprehensive guides to tea culture, brewing science, and global traditions.">
+    <Header currentPage="home" />
     
-    <!-- Center Content -->
-    <div class="flex-1 max-w-3xl">
-      <!-- Breadcrumbs -->
-      <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-8">
-        <span class="text-primary">Home</span>
-      </div>
-      
-      <!-- Welcome Section -->
-      <section class="mb-16">
-        <h1 class="text-4xl font-bold text-slate-900 mb-6">Welcome to Unbottle Your Tea</h1>
-        <p class="text-xl text-slate-600 leading-relaxed mb-6">
-          Discover the rich world of tea culture through our comprehensive guide covering etiquette across traditions, current industry trends, and essential technical knowledge. Whether you're a curious beginner or a seasoned enthusiast, explore the art and science of tea appreciation.
-        </p>
-        <div class="flex gap-3">
-          <a href="/tea-etiquette-trends-technical-vocabulary/" class="flex items-center gap-2 rounded-sm border border-primary px-6 py-3 bg-primary text-white text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
-            <span>Start Exploring</span>
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- Topic Cards -->
-      <section class="mb-20" id="topics">
-        <div class="flex items-baseline justify-between border-b-2 border-primary pb-2 mb-8">
-          <h2 class="text-2xl font-bold uppercase tracking-tighter text-slate-900">Explore the Guide</h2>
-          <span class="text-sm font-serif italic text-slate-500">Seven Essential Topics</span>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a href="/tea-etiquette-trends-technical-vocabulary/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">menu_book</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Overview</h3>
-            <p class="text-xs text-slate-500 leading-normal">Comprehensive introduction to tea etiquette, trends, and technical vocabulary across global traditions.</p>
-          </a>
-          <a href="/tea-etiquette-trends-technical-vocabulary/history/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">history</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">History & Evolution</h3>
-            <p class="text-xs text-slate-500 leading-normal">Journey through 5,000 years of tea culture from ancient China to modern global phenomena.</p>
-          </a>
-          <a href="/tea-etiquette-trends-technical-vocabulary/technical-deep-dive/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">science</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Technical Deep-Dive</h3>
-            <p class="text-xs text-slate-500 leading-normal">Master brewing parameters including temperature, timing, ratios, and water quality.</p>
-          </a>
-          <a href="/tea-etiquette-trends-technical-vocabulary/ontology/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">account_tree</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Ontology</h3>
-            <p class="text-xs text-slate-500 leading-normal">Classification systems, Camellia sinensis varieties, processing methods, and grading terminology.</p>
-          </a>
-          <a href="/tea-etiquette-trends-technical-vocabulary/trends/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">trending_up</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Current Trends</h3>
-            <p class="text-xs text-slate-500 leading-normal">Industry insights on specialty markets, sustainability, bubble tea, and emerging innovations.</p>
-          </a>
-          <a href="/tea-etiquette-trends-technical-vocabulary/tools/" class="p-6 border border-primary/10 bg-white/50 hover:bg-white hover:shadow-md transition-all flex flex-col gap-3">
-            <span class="material-symbols-outlined text-primary text-2xl">hardware</span>
-            <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Tools & Resources</h3>
-            <p class="text-xs text-slate-500 leading-normal">Essential equipment guide with interactive brewing calculator for perfect cups every time.</p>
-          </a>
-        </div>
-      </section>
-
-      <!-- Featured Section -->
-      <section id="featured">
-        <div class="flex items-baseline justify-between border-b-2 border-secondary pb-2 mb-8">
-          <h2 class="text-2xl font-bold uppercase tracking-tighter text-slate-900">Featured</h2>
-          <span class="text-sm font-serif italic text-slate-500">Common Challenges</span>
-        </div>
-        <div class="bg-primary/5 p-8 rounded-sm relative overflow-hidden border-l-4 border-primary">
-          <span class="material-symbols-outlined absolute -right-4 -top-4 text-8xl text-primary/10 pointer-events-none">format_quote</span>
-          <p class="text-slate-800 font-serif italic text-xl leading-relaxed mb-6">"Every tea master began as a confused beginner. The challenges we face are universal experiences, not personal failures. Each mistake teaches valuable lessons that ultimately deepen appreciation."</p>
-          <div class="flex items-center gap-3">
-            <div class="size-10 rounded-full bg-slate-300 overflow-hidden flex items-center justify-center">
-              <span class="material-symbols-outlined text-slate-500">emoji_food_beverage</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Tea Culture & Appreciation</div>
+            <h1>The Art and Science of Tea</h1>
+            <p class="hero-subtitle">A comprehensive exploration of etiquette, trends, and technical vocabulary from ancient ceremonies to modern brewing. Discover the depth and richness of global tea culture through expert research and practical guidance.</p>
+            <div class="hero-meta">
+                <span>7 Comprehensive Topics</span>
+                <span>|</span>
+                <span>Global Traditions</span>
+                <span>|</span>
+                <span>Expert Research</span>
+                <span>|</span>
+                <span>Practical Guides</span>
             </div>
-            <div>
-              <p class="text-xs font-bold uppercase tracking-widest text-slate-900">Navigate Challenges</p>
-              <p class="text-[10px] text-slate-500">Solutions to common tea appreciation obstacles</p>
+            <a href={`/${topicSlug}/`} class="hero-cta">Begin Your Tea Journey</a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="abstract">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">Introduction</div>
+                <h2 class="section-title">About This Comprehensive Resource</h2>
             </div>
-          </div>
+
+            <div class="abstract">
+                <h3>Curated Tea Knowledge for Enthusiasts</h3>
+                <p>This comprehensive guide examines the multifaceted world of tea culture, bridging ancient traditions with contemporary practices. From the meditative precision of Japanese chanoyu to the social elegance of British afternoon tea, we explore how ceremony shapes experience and how technique elevates appreciation. Our investigation encompasses brewing science—including optimal temperatures, steeping times, and vessel selection—alongside the cultural vocabulary necessary for meaningful engagement with tea communities worldwide.</p>
+                <p>Whether you are a novice seeking foundational knowledge or an experienced enthusiast refining your palate, this resource offers structured pathways to deeper understanding. Topics span tea's 5,000-year historical journey from legendary Chinese origins through the establishment of global trade routes, the Boston Tea Party, and the modern specialty tea renaissance. We examine the botanical and processing distinctions between tea types, from delicate white teas to robust, aged pu-erhs, providing the terminology and classification systems used by professionals.</p>
+                <p>Our exploration extends to current market trends toward sustainability, direct trade relationships, cold brew innovations, and wellness applications. Essential equipment recommendations help you build your tea practice, while solutions to common challenges address issues like storage, water quality, and navigating overwhelming variety. Every section combines scholarly research with practical application, ensuring you gain both knowledge and skill.</p>
+            </div>
         </div>
-        <div class="mt-6">
-          <a href="/tea-etiquette-trends-technical-vocabulary/challenges/" class="text-primary hover:underline text-sm font-medium">Read about common challenges and solutions →</a>
+    </section>
+
+    <!-- Why Tea Matters Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">Why Tea Matters</h2>
+                <p class="section-description">Understanding the cultural, health, and social significance of the world's most popular beverage after water.</p>
+            </div>
+
+            <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="content-card">
+                    <h3>Cultural Heritage</h3>
+                    <p>Tea has shaped civilizations, influenced art and literature, and connected cultures across continents for millennia. From Chinese poetry celebrating the "froth of the liquid jade" to British afternoon tea rituals, Japanese tea houses, and Moroccan mint tea ceremonies, this beverage carries profound cultural significance. Understanding tea provides insight into the values, aesthetics, and social structures of societies worldwide.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Health & Wellness</h3>
+                    <p>Modern science confirms what traditional medicine has long recognized: tea offers significant health benefits. Rich in antioxidants, particularly catechins and L-theanine, tea supports cardiovascular health, cognitive function, and stress reduction. Green tea's EGCG, black tea's theaflavins, and the unique compounds in oolong and white teas contribute to overall wellbeing. The ritual of tea preparation itself promotes mindfulness and relaxation.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Social Connection</h3>
+                    <p>Tea has always been a social beverage, facilitating conversation, building relationships, and marking important life moments. Whether gathering for traditional ceremonies, business meetings over tea, or casual catch-ups with friends, the shared experience of tea creates bonds. The pace of tea—slower than coffee, more involved than water—encourages presence and meaningful interaction.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Craft & Artistry</h3>
+                    <p>Quality tea represents agricultural artistry, with master craftspeople dedicating lifetimes to perfecting cultivation and processing techniques. From the withering and oxidation of oolongs to the shading and steaming of Japanese greens, each step requires skill and intuition. Appreciating tea means recognizing the human effort and natural conditions that create each cup.</p>
+                </div>
+            </div>
         </div>
-      </section>
-    </div>
-  </main>
+    </section>
+
+    <!-- Tea Types Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">The Five Classic Tea Types</h2>
+                <p class="section-description">All true tea comes from the Camellia sinensis plant. Processing methods create the distinct categories we know.</p>
+            </div>
+
+            <div class="tea-types-grid" style="margin-top: 3rem;">
+                {teaTypes.map((tea) => (
+                    <div class="tea-type-card" style="background: #f8f9fa; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h3 style="color: #4a7c59; margin-bottom: 1rem;">{tea.name}</h3>
+                        <p style="margin-bottom: 1rem;">{tea.description}</p>
+                        <div style="display: flex; gap: 2rem; font-size: 0.9rem; color: #666;">
+                            <span><strong>Origin:</strong> {tea.origin}</span>
+                            <span><strong>Caffeine:</strong> {tea.caffeine}</span>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Brewing Basics Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">The Four Pillars of Brewing</h2>
+                <p class="section-description">Master these fundamentals for consistently exceptional tea.</p>
+            </div>
+
+            <div class="brewing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                {brewingBasics.map((pillar) => (
+                    <div class="brewing-card" style="border-left: 4px solid #4a7c59; padding-left: 1.5rem;">
+                        <h3>{pillar.element}</h3>
+                        <p>{pillar.description}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: #f0f7f0; border-radius: 8px;">
+                <p class="citation" style="margin: 0; font-style: italic; text-align: center;">"The best tea is the tea you enjoy. Guidelines provide starting points, but personal preference should always guide your practice."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tea Etiquette Introduction -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">Introduction to Tea Etiquette</h2>
+                <p class="section-description">Understanding the principles that guide respectful, meaningful tea experiences.</p>
+            </div>
+
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Tea etiquette encompasses far more than formal rules—it represents a philosophy of presence, respect, and connection. While specific customs vary dramatically across cultures, certain universal principles underpin meaningful tea experiences everywhere. Understanding these foundations enables you to participate confidently in diverse tea traditions and develop your own mindful practice.</p>
+
+            <div class="etiquette-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                {etiquettePrinciples.map((principle) => (
+                    <div class="etiquette-card" style="background: #f8f9fa; padding: 2rem; border-radius: 8px;">
+                        <h3 style="color: #4a7c59;">{principle.title}</h3>
+                        <p>{principle.description}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <p style="margin-bottom: 1.5rem;">Explore detailed etiquette guides for specific traditions in our comprehensive <a href={`/${topicSlug}/`} style="color: #4a7c59;">Overview section</a>.</p>
+            </div>
+
+            <div style="padding: 2rem; background: #f8f9fa; border-radius: 8px; margin-top: 3rem;">
+                <h3 style="color: #4a7c59; margin-bottom: 1rem;">The Global Language of Tea</h3>
+                <p>Tea transcends linguistic and cultural barriers, creating a universal language of hospitality and connection. From the Japanese phrase "ichi-go ichi-e" (one time, one meeting) that reminds us to treasure each tea gathering as a unique moment, to the British concept of "putting the kettle on" as a response to any crisis, tea embodies human connection. Chinese tea culture speaks of "cha qi" (tea energy) and "hui gan" (returning sweetness), while Indian chai culture represents community and warmth. Learning these concepts enriches your appreciation and connects you to a global community of tea practitioners who share your passion for this remarkable beverage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Grid Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">Contents</div>
+                <h2 class="section-title">Explore Our Research Topics</h2>
+                <p class="section-description">Seven interconnected areas of tea knowledge, from foundational etiquette to advanced technical concepts. Each section offers comprehensive coverage for both beginners and experienced practitioners.</p>
+            </div>
+
+            <div class="topic-cards" style="margin-top: 3rem;">
+                {topics.map((topic, index) => (
+                    <a href={topic.href} class="topic-card" style="display: block; text-decoration: none; color: inherit; background: #f8f9fa; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem; transition: transform 0.2s, box-shadow 0.2s;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
+                            <div style="flex: 1;">
+                                <h4 style="color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Topic {String(index + 1).padStart(2, '0')}</h4>
+                                <h3 style="color: #4a7c59; margin-bottom: 1rem;">{topic.title}</h3>
+                                <p style="margin: 0; color: #444;">{topic.description}</p>
+                            </div>
+                            <span style="font-size: 1.5rem; color: #4a7c59;">→</span>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2 class="section-title">Getting Started with Tea</h2>
+                <p class="section-description">Practical steps for beginning or deepening your tea journey.</p>
+            </div>
+
+            <div class="getting-started-content" style="margin-top: 2rem;">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Whether you are taking your first steps into the world of tea or seeking to deepen existing knowledge, approaching the subject systematically yields the best results. The vast array of tea types, traditions, and techniques can overwhelm beginners, but structured learning transforms complexity into enjoyable discovery.</p>
+
+                <h3 style="color: #4a7c59; margin-bottom: 1rem;">For Beginners</h3>
+                <p style="margin-bottom: 1.5rem;">Start with accessible, forgiving teas that tolerate brewing variations while you develop your palate. Chinese green teas like Dragon Well or Biluochun offer entry points into delicate flavors without the precision demands of Japanese greens. Black teas from Assam or Ceylon provide robust, consistent results that build confidence. Focus initially on one tea type, exploring multiple examples to understand the range within a category before expanding.</p>
+
+                <h3 style="color: #4a7c59; margin-bottom: 1rem;">For Intermediate Enthusiasts</h3>
+                <p style="margin-bottom: 1.5rem;">Once comfortable with basic brewing, experiment with gongfu cha preparation using higher leaf ratios and multiple short infusions. This Chinese method reveals dimensions of flavor hidden in Western-style brewing. Explore oolongs, which offer incredible diversity and reward attentive preparation. Begin building a tea collection with proper storage containers, focusing on teas that improve with age or offer re-steeping value.</p>
+
+                <h3 style="color: #4a7c59; margin-bottom: 1rem;">For Advanced Practitioners</h3>
+                <p style="margin-bottom: 1.5rem;">Develop expertise in specific categories through comparative tasting sessions, brewing the same tea with varying parameters to understand their effects. Study the traditional ceremonies of cultures whose tea traditions fascinate you—Japanese chanoyu, Chinese gongfu cha, Korean darye, or British afternoon tea. Consider the terroir factors that produce distinctive teas, exploring how elevation, climate, soil, and processing create unique expressions.</p>
+
+                <div style="padding: 2rem; background: #f0f7f0; border-radius: 8px; margin-top: 2rem;">
+                    <h3 style="color: #4a7c59; margin-bottom: 1rem;">Essential Equipment for Every Level</h3>
+                    <p>Every tea practitioner benefits from quality tools. A variable temperature kettle enables precise brewing for different tea types. A gaiwan offers versatility across Chinese teas, while a kyusu serves Japanese greens well. Digital scales ensure consistent leaf measurement, and a timer prevents over-steeping. Quality storage vessels protect tea from light, air, moisture, and odors. Explore our <a href={`/${topicSlug}/tools/`} style="color: #4a7c59;">Tools section</a> for detailed equipment recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="citation" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 3rem 0;">
+                <p style="font-size: 1.3rem; font-style: italic; margin-bottom: 1.5rem;">"Tea tempers the spirits and harmonizes the mind, dispels lassitude and relieves fatigue, awakens thought and prevents drowsiness."</p>
+                <p style="color: #666;">— Lu Yu, The Classic of Tea, c. 760 CE</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tea Origins Deep Dive Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2 class="section-title">The Geography of Tea</h2>
+                <p class="section-description">Understanding how terroir shapes the character of tea.</p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="margin-bottom: 1.5rem;">Tea grows in a remarkable band around the world between the latitudes of 42°N and 33°S, thriving in tropical and subtropical climates with adequate rainfall and well-drained soil. The concept of "terroir"—the complete natural environment in which a particular tea is produced, including factors such as the soil, topography, and climate—profoundly influences the final character of the leaf. Understanding these geographical distinctions helps tea drinkers appreciate why teas from different regions possess such distinctive personalities.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">China: The Birthplace of Tea</h3>
+                <p style="margin-bottom: 1.5rem;">China, as the ancestral home of tea cultivation, produces an extraordinary diversity of styles across its vast territory. The southwestern provinces of Yunnan and Sichuan represent the historical origin of tea, with ancient forests still producing leaves from trees hundreds of years old. Fujian province specializes in oolongs and white teas, with distinct mineral profiles from its rocky mountains. Zhejiang province produces the famous Dragon Well green tea, while Anhui is known for Keemun black tea. Each region's unique combination of soil composition, elevation, humidity, and processing traditions creates teas that cannot be replicated elsewhere.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">India: Empire of Black Tea</h3>
+                <p style="margin-bottom: 1.5rem;">British colonial efforts to break China's tea monopoly led to the establishment of vast tea plantations across India, now the world's second-largest producer. The three major growing regions each produce distinctly different teas. Assam, in the northeast, yields robust, malty black teas from the Camellia sinensis var. assamica plant, thriving in the region's hot, humid climate. Darjeeling, nestled in the Himalayan foothills, produces teas of exceptional delicacy and complexity, often called the "champagne of teas," with distinct flushes harvested throughout the growing season. Nilgiri, in southern India, creates fragrant, well-balanced teas that blend beautifully with other varieties.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Japan: Precision and Ceremony</h3>
+                <p style="margin-bottom: 1.5rem;">Japanese tea culture developed along unique paths, emphasizing green teas processed with steam rather than the pan-firing methods common in China. Shizuoka prefecture produces the majority of Japan's tea, including the ubiquitous Sencha. Uji, near Kyoto, represents the historical heart of Japanese tea, producing matcha and gyokuro through careful shading techniques that increase chlorophyll and amino acid content. The Japanese approach to tea emphasizes umami—that savory, brothy quality prized in the finest green teas—and precise, standardized processing methods that ensure consistency.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Taiwan: The Artisan's Island</h3>
+                <p style="margin-bottom: 1.5rem;">Despite its small size, Taiwan produces some of the world's most sought-after oolong teas. The island's mountainous interior creates ideal growing conditions at high elevations, where cooler temperatures and frequent fog produce teas of exceptional complexity and sweetness. Famous growing regions include Alishan, Lishan, and Da Yu Ling, each producing distinctive high-mountain oolongs with floral aromatics and lingering aftertaste. Taiwan's tea industry emphasizes small-batch, artisanal production methods that highlight the skill of individual tea masters.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Emerging Regions</h3>
+                <p style="margin-bottom: 1.5rem;">Beyond these traditional powerhouses, tea cultivation has expanded to new territories. Sri Lanka (formerly Ceylon) produces teas across distinct elevation bands, from the bold low-grown varieties to the delicate high-grown teas. Kenya has become a major black tea exporter, known for bright, strong teas that form the backbone of many blends. Nepal, neighboring Darjeeling, creates teas with similar character but developing its own identity. Even unexpected regions like Hawaii, England, and New Zealand now produce small quantities of specialty tea, expanding the boundaries of the tea world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tea and Health Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2 class="section-title">Tea and Wellness</h2>
+                <p class="section-description">Exploring the health benefits and mindful aspects of tea consumption.</p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="margin-bottom: 1.5rem;">For thousands of years, traditional medicine systems have recognized tea's beneficial properties. Modern scientific research has validated many of these traditional claims, revealing the complex biochemistry that makes tea one of the healthiest beverages available. Understanding these benefits adds another dimension to tea appreciation and can guide your choices toward teas that support your specific wellness goals.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Antioxidants and Cellular Health</h3>
+                <p style="margin-bottom: 1.5rem;">Tea is exceptionally rich in polyphenols, plant compounds with powerful antioxidant properties. Green tea contains high levels of catechins, particularly epigallocatechin gallate (EGCG), which has been extensively studied for its potential to combat oxidative stress and inflammation. These compounds help neutralize free radicals, unstable molecules that can damage cells and contribute to aging and disease. White tea, processed minimally, retains particularly high antioxidant levels. Regular consumption of antioxidant-rich teas may support cardiovascular health, brain function, and healthy aging.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">L-Theanine and Mental Clarity</h3>
+                <p style="margin-bottom: 1.5rem;">Tea contains a unique amino acid called L-theanine, found almost exclusively in tea plants. This remarkable compound crosses the blood-brain barrier and promotes alpha wave production in the brain, creating a state of relaxed alertness. Combined with moderate caffeine content, L-theanine provides smooth, sustained energy without the jitters or crash associated with coffee. This synergistic relationship explains why tea has been the beverage of choice for monks, scholars, and meditators for centuries—it supports focused, calm awareness perfect for contemplative activities.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Heart Health Benefits</h3>
+                <p style="margin-bottom: 1.5rem;">Multiple large-scale studies have associated regular tea consumption with improved cardiovascular health markers. The flavonoids in tea may help improve blood vessel function, reduce LDL cholesterol oxidation, and support healthy blood pressure levels. Both green and black teas demonstrate these benefits, though through somewhat different mechanisms. Black tea's theaflavins and thearubigins, products of oxidation, show particular promise for cardiovascular support. Drinking three to five cups daily appears to provide optimal benefits for most people.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Metabolic Support</h3>
+                <p style="margin-bottom: 1.5rem;">Research suggests that tea, particularly green tea, may support healthy metabolism and weight management. The combination of catechins and caffeine appears to enhance energy expenditure and fat oxidation. Oolong tea shows particular promise for metabolism support, with studies suggesting it may help activate enzymes that enhance fat burning. While tea alone cannot replace a healthy diet and exercise, it can be a valuable component of a comprehensive wellness strategy.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Mindfulness and Ritual</h3>
+                <p style="margin-bottom: 1.5rem;">Beyond biochemical benefits, tea practice offers profound mental health advantages through mindfulness and ritual. The deliberate, slow nature of traditional tea preparation creates natural opportunities for present-moment awareness. The sensory engagement—observing the dry leaf, inhaling the aroma, watching the color develop, feeling the warm cup—anchors attention in the body and breath. Regular tea ritual can reduce stress, improve focus, and create islands of calm in busy lives. Many practitioners find that their daily tea session becomes a cherished form of moving meditation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storage and Aging Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">Tea Storage and Aging</h2>
+                <p class="section-description">Proper care for your tea collection ensures optimal flavor and longevity.</p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="margin-bottom: 1.5rem;">How you store tea significantly impacts its flavor, aroma, and shelf life. Different tea types have varying storage requirements, with some best consumed fresh while others improve with age. Understanding these needs helps you maintain a tea collection at peak quality and make informed purchasing decisions based on your consumption habits.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">The Enemies of Tea</h3>
+                <p style="margin-bottom: 1.5rem;">Five factors degrade tea quality: air, light, heat, moisture, and odors. Oxygen exposure causes oxidation to continue, dulling flavors and diminishing freshness. Light, particularly sunlight, breaks down chlorophyll and other compounds, creating unpleasant stale notes. Heat accelerates chemical reactions that degrade quality. Moisture promotes mold growth and destroys dry leaves. Tea's porous nature makes it susceptible to absorbing odors from its environment, potentially ruining delicate flavors.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Green and White Tea Storage</h3>
+                <p style="margin-bottom: 1.5rem;">These minimally oxidized teas are the most vulnerable to degradation. Store them in airtight, opaque containers in cool, dark places. Refrigeration can extend freshness for delicate greens and white teas, provided the container is truly airtight to prevent moisture condensation and odor absorption. For teas stored in the refrigerator, allow the sealed container to come to room temperature before opening to prevent condensation. Consume these teas within six to twelve months for optimal flavor.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Oolong Storage Strategies</h3>
+                <p style="margin-bottom: 1.5rem;">Lightly oxidized, unroasted oolongs follow similar storage guidelines to green teas. However, heavily roasted oolongs benefit from slight aging, with some enthusiasts storing them in earthenware containers that allow minimal air exchange. This controlled aging mellows the roast character and develops complex flavors over months or years. The traditional practice of storing Tieguanyin in "tea caddies" for several months before consumption allows the fire qi to settle and the true character to emerge.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Pu-erh and Aged Teas</h3>
+                <p style="margin-bottom: 1.5rem;">Pu-erh tea uniquely improves with age, developing complexity and smoothness over decades when properly stored. Raw (sheng) pu-erh requires controlled humidity and airflow to support slow microbial fermentation. Ideal conditions maintain 60-70% relative humidity with temperatures between 20-25°C. Ripe (shou) pu-erh, having undergone accelerated fermentation, is more stable but still benefits from aging that allows off-flavors from the piling process to dissipate. Properly aged pu-erh commands high prices among collectors, with cakes from the 1970s and 1980s selling for thousands of dollars.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Black Tea Durability</h3>
+                <p style="margin-bottom: 1.5rem;">Fully oxidized black teas are the most shelf-stable, retaining quality for two to three years under proper conditions. Their oxidation process creates stable compounds that resist further degradation. Store in airtight containers away from light and heat, but refrigeration is unnecessary and may introduce moisture risks. High-quality black teas actually benefit from brief aging of six months to a year, allowing sharp notes to mellow and the full character to develop.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Tea Guide Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">09</div>
+                <h2 class="section-title">Seasonal Tea Appreciation</h2>
+                <p class="section-description">Aligning your tea choices with the rhythms of nature.</p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="margin-bottom: 1.5rem;">Just as cuisines change with the seasons, tea drinking can harmonize with the rhythms of nature. Traditional Chinese medicine and tea culture have long recognized that different teas suit different seasons, supporting the body's needs as temperatures and energies shift throughout the year. Understanding these seasonal connections enriches your practice and helps you select teas that feel intuitively right for each time of year.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Spring: Fresh Beginnings</h3>
+                <p style="margin-bottom: 1.5rem;">Spring represents the most anticipated season for tea enthusiasts, marking the arrival of first flush teas harvested after winter dormancy. Green teas from China and Japan, Darjeeling first flush, and fresh white teas capture the energy of new growth. These delicate, aromatic teas awaken the senses after winter's heavier foods and warming teas. The high amino acid content in spring teas provides a natural energy boost perfect for the season of renewal. Seek out pre-Qing Ming Dragon Well, Shincha Japanese greens, and early Silver Needle to experience spring in a cup.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Summer: Cooling Hydration</h3>
+                <p style="margin-bottom: 1.5rem;">Hot weather calls for cooling teas that hydrate and refresh without overheating the body. Green teas, white teas, and lightly oxidized oolongs provide cooling energetic properties according to traditional Chinese medicine. Cold brewing becomes particularly appealing in summer—steeping tea in cold water for several hours produces smooth, sweet infusions without bitterness. Floral teas like jasmine, chrysanthemum, and osmanthus oolong feel especially appropriate for summer days. Consider keeping a pitcher of cold-brewed tea in the refrigerator for refreshing hydration throughout hot days.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Autumn: Transitional Warmth</h3>
+                <p style="margin-bottom: 1.5rem;">As temperatures moderate and harvest season peaks, autumn invites fuller-bodied teas that provide gentle warmth without the intensity needed for winter. Oolong teas shine during this season, with their balanced oxidation offering complexity and depth. Tieguanyin, Wuyi rock oolongs, and Phoenix Dancong varieties complement autumn's crisp air and harvest abundance. Darjeeling second flush, with its characteristic muscatel notes, captures the essence of late summer warmth carried into fall. These teas provide comfort as days shorten and nature prepares for rest.</p>
+                
+                <h3 style="color: #4a7c59; margin: 2rem 0 1rem;">Winter: Deep Warmth and Comfort</h3>
+                <p style="margin-bottom: 1.5rem;">Cold weather demands warming, robust teas that heat the body from within. Fully oxidized black teas, dark oolongs, and aged pu-erh provide the depth and warming energy needed during winter months. High-roast Tieguanyin, Aged white tea, and ripe pu-erh offer particular comfort on the coldest days. These teas stand up to richer winter foods and provide sustained warmth through long evenings. The ritual of preparing these more involved teas also provides cozy indoor activity when outdoor excursions seem less appealing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section style="background: #f8f9fa;">
+        <div class="container">
+            <div style="text-align: center; padding: 3rem 0;">
+                <h2 style="margin-bottom: 1rem;">Begin Your Exploration</h2>
+                <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Dive into our comprehensive guides and discover the depth, history, and artistry of tea culture. From ancient Chinese ceremonies to modern brewing innovations, our seven topic areas provide everything you need to deepen your appreciation and mastery of tea. For those equally passionate about coffee, explore the <a href="https://completehomebarista.com/blog/">home barista blog</a> for brewing guides and equipment reviews.</p>
+                <a href={`/${topicSlug}/`} class="hero-cta" style="display: inline-block;">Start with the Overview →</a>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
 </BaseLayout>
